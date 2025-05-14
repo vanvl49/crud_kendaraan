@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "864588086270",
+    "project_id": "crudbooking-43175",
+    "storage_bucket": "crudbooking-43175.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:864588086270:android:99b061f59f30c872a15eaf",
+        "android_client_info": {
+          "package_name": "com.example.crud_penyewaan"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDSwOuu50UZKNhHSRV4JSXz16m7uy3qRTI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
