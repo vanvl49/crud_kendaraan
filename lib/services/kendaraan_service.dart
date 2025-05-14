@@ -11,7 +11,7 @@ class KendaraanService {
       final docSnapshot = await docRef;
       kendaraan.id = docSnapshot.id;
     } catch (e) {
-      print("❌ Error adding book: $e");
+      print("Error: $e");
     }
   }
 
@@ -25,7 +25,7 @@ class KendaraanService {
         return KendaraanModel.fromFirestore(doc);
       }).toList();
     } catch (e) {
-      print("Error fetching data: $e");
+      print("Error: $e");
       return [];
     }
   }
@@ -49,7 +49,7 @@ class KendaraanService {
         return KendaraanModel.fromFirestore(doc);
       }).toList();
     } catch (e) {
-      print("Error fetching data: $e");
+      print("Error: $e");
       return [];
     }
   }
@@ -65,7 +65,7 @@ class KendaraanService {
         return KendaraanModel.fromFirestore(doc);
       }).toList();
     } catch (e) {
-      print("Error fetching data: $e");
+      print("Error: $e");
       return [];
     }
   }

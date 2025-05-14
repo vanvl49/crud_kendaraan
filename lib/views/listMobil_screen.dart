@@ -234,7 +234,8 @@ class _ListMobilState extends State<ListMobil> {
       //   decoration: const BoxDecoration(
       //     borderRadius: BorderRadius.only(
       //       topLeft: Radius.circular(20),
-      //       topRight: Radius.circular(20),
+      //       topRight:
+      // Radius.circular(20),
       //     ),
       //     color: Color(0xFFFB923C),
       //   ),

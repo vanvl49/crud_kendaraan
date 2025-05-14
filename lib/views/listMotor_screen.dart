@@ -25,9 +25,6 @@ class _ListMotorState extends State<ListMotor> {
 
   Future<void> fetchMotor() async {
     motor = await _kendaraanService.getMotor();
-    // for (var car in motor) {
-    //   print('Judul: ${book.title}, Deskripsi: ${book.description}');
-    // }
     setState(() {});
   }
 

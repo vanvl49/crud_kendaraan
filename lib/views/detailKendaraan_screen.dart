@@ -34,7 +34,6 @@ class _DetailKendaraanState extends State<DetailKendaraan> {
 
   Future<void> deleteKendaraan(String id) async {
     await _kendaraanService.deleteKendaraan(id);
-    // No need to fetch kendaraan after deletion since we're navigating away
   }
 
   @override
@@ -185,11 +184,11 @@ class _DetailKendaraanState extends State<DetailKendaraan> {
                                         await deleteKendaraan(id_kendaraan);
                                         Navigator.of(
                                           context,
-                                        ).pop(); // Close dialog
+                                        ).pop(); 
                                         Navigator.pop(
                                           context,
                                           true,
-                                        ); // Return to previous screen with refresh flag
+                                        );
                                       },
                                     ),
                                     OutlinedButton(
