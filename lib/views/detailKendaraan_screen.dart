@@ -1,3 +1,4 @@
+import 'package:crud_penyewaan/views/createPenyewaan_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:crud_penyewaan/models/kendaraan_model.dart';
 import 'package:crud_penyewaan/services/kendaraan_service.dart';
@@ -182,13 +183,8 @@ class _DetailKendaraanState extends State<DetailKendaraan> {
                                       ),
                                       onPressed: () async {
                                         await deleteKendaraan(id_kendaraan);
-                                        Navigator.of(
-                                          context,
-                                        ).pop(); 
-                                        Navigator.pop(
-                                          context,
-                                          true,
-                                        );
+                                        Navigator.of(context).pop();
+                                        Navigator.pop(context, true);
                                       },
                                     ),
                                     OutlinedButton(
@@ -263,6 +259,35 @@ class _DetailKendaraanState extends State<DetailKendaraan> {
                         ),
                       ),
                     ],
+                  ),
+                  const SizedBox(height: 16),
+                  SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      onPressed: () async {
+                        await Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder:
+                                (_) => CreatePenyewaan(
+                                  id_kendaraan: kendaraan?.id ?? '0',
+                                ),
+                          ),
+                        );
+                        fetchKendaraan();
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Color(0xFFFABF1D),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        padding: const EdgeInsets.symmetric(vertical: 16),
+                      ),
+                      child: const Text(
+                        'Sewa Kendaraan',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
                   ),
                 ],
               ),

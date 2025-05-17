@@ -70,9 +70,9 @@ class KendaraanService {
     }
   }
 
-  Future<void> updateKendaraan(KendaraanModel book) async {
-    if (book.id == null) return;
-    await kendaraanRef.doc(book.id).update(book.toJson());
+  Future<void> updateKendaraan(KendaraanModel kendaraan) async {
+    if (kendaraan.id == null) return;
+    await kendaraanRef.doc(kendaraan.id).update(kendaraan.toJson());
   }
 
   Future<void> deleteKendaraan(String id) async {

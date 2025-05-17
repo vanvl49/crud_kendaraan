@@ -1,5 +1,6 @@
 import 'package:crud_penyewaan/models/kendaraan_model.dart';
 import 'package:crud_penyewaan/views/detailKendaraan_screen.dart';
+import 'package:crud_penyewaan/views/listPenyewaan_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:crud_penyewaan/services/kendaraan_service.dart';
 import 'package:crud_penyewaan/views/createKendaraan_screen.dart';
@@ -231,41 +232,48 @@ class _ListMotorState extends State<ListMotor> {
         ),
       ),
 
-      // bottomNavigationBar: Container(
-      //   decoration: const BoxDecoration(
-      //     borderRadius: BorderRadius.only(
-      //       topLeft: Radius.circular(20),
-      //       topRight: Radius.circular(20),
-      //     ),
-      //     color: Color(0xFFFB923C),
-      //   ),
-      //   height: 80,
-      //   child: Padding(
-      //     padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-      //     child: Row(
-      //       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      //       crossAxisAlignment: CrossAxisAlignment.center,
-      //       children: [
-      //         Container(
-      //           decoration: BoxDecoration(
-      //             color: Colors.white,
-      //             borderRadius: BorderRadius.circular(12),
-      //           ),
-      //           padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 4),
-      //           child: const Icon(
-      //             Icons.car_crash,
-      //             size: 35,
-      //             color: Color(0xFFFB923C),
-      //           ),
-      //         ),
-      //         IconButton(
-      //           onPressed: () {},
-      //           icon: const Icon(Icons.home, size: 30, color: Colors.white),
-      //         ),
-      //       ],
-      //     ),
-      //   ),
-      // ),
+      bottomNavigationBar: Container(
+        decoration: const BoxDecoration(
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(20),
+            topRight: Radius.circular(20),
+          ),
+          color: Color(0xFFFB923C),
+        ),
+        height: 80,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 4),
+                child: const Icon(
+                  Icons.car_crash,
+                  size: 35,
+                  color: Color(0xFFFB923C),
+                ),
+              ),
+              IconButton(
+                onPressed: () {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => const PenyewaanView(),
+                    ),
+                  );
+                },
+                icon: const Icon(Icons.home, size: 30, color: Colors.white),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

@@ -14,6 +14,7 @@ class CreateKendaraan extends StatefulWidget {
 }
 
 class _CreateKendaraanState extends State<CreateKendaraan> {
+  final _formKey = GlobalKey<FormState>();
 
   String selectedKategori;
   final TextEditingController kategoriController = TextEditingController();
@@ -57,88 +58,133 @@ class _CreateKendaraanState extends State<CreateKendaraan> {
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            DropdownButtonFormField<String>(
-              value: selectedKategori,
-              decoration: const InputDecoration(
-                labelText: 'Kategori',
-                border: OutlineInputBorder(),
+        child: Form(
+          key: _formKey, // ini penting!
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              // ... Dropdown tetap bisa seperti biasa
+              DropdownButtonFormField<String>(
+                value: selectedKategori,
+                decoration: const InputDecoration(
+                  labelText: 'Kategori',
+                  border: OutlineInputBorder(),
+                ),
+                items: const [
+                  DropdownMenuItem(value: 'Mobil', child: Text('Mobil')),
+                  DropdownMenuItem(value: 'Motor', child: Text('Motor')),
+                ],
+                onChanged: (String? newValue) {
+                  if (newValue != null) {
+                    setState(() {
+                      selectedKategori = newValue;
+                      kategoriController.text = newValue;
+                    });
+                  }
+                },
               ),
-              items: const [
-                DropdownMenuItem(value: 'Mobil', child: Text('Mobil')),
-                DropdownMenuItem(value: 'Motor', child: Text('Motor')),
-              ],
-              onChanged: (String? newValue) {
-                if (newValue != null) {
-                  setState(() {
-                    selectedKategori = newValue;
-                    kategoriController.text = newValue;
-                  });
-                }
-              },
-            ),
-            const SizedBox(height: 16),
-            TextField(
-              controller: merkController,
-              decoration: const InputDecoration(
-                labelText: 'Merk',
-                border: OutlineInputBorder(),
+              const SizedBox(height: 16),
+
+              // 👇 Ganti TextField jadi TextFormField dan tambahkan validator
+              TextFormField(
+                controller: merkController,
+                decoration: const InputDecoration(
+                  labelText: 'Merk',
+                  border: OutlineInputBorder(),
+                ),
+                validator: (value) {
+                  if (value == null || value.trim().isEmpty) {
+                    return 'Merk wajib diisi';
+                  }
+                  return null;
+                },
               ),
-            ),
-            const SizedBox(height: 16),
-            TextField(
-              controller: namaController,
-              decoration: const InputDecoration(
-                labelText: 'Nama Kendaraan',
-                border: OutlineInputBorder(),
+              const SizedBox(height: 16),
+
+              TextFormField(
+                controller: namaController,
+                decoration: const InputDecoration(
+                  labelText: 'Nama Kendaraan',
+                  border: OutlineInputBorder(),
+                ),
+                validator: (value) {
+                  if (value == null || value.trim().isEmpty) {
+                    return 'Nama kendaraan wajib diisi';
+                  }
+                  return null;
+                },
               ),
-            ),
-            const SizedBox(height: 16),
-            TextField(
-              controller: kapasitasController,
-              keyboardType: TextInputType.number,
-              decoration: const InputDecoration(
-                labelText: 'Kapasitas Penumpang',
-                border: OutlineInputBorder(),
-                suffixText: 'orang',
+              const SizedBox(height: 16),
+
+              TextFormField(
+                controller: kapasitasController,
+                keyboardType: TextInputType.number,
+                decoration: const InputDecoration(
+                  labelText: 'Kapasitas Penumpang',
+                  border: OutlineInputBorder(),
+                  suffixText: 'orang',
+                ),
+                validator: (value) {
+                  if (value == null || value.trim().isEmpty) {
+                    return 'Kapasitas wajib diisi';
+                  }
+                  return null;
+                },
               ),
-            ),
-            const SizedBox(height: 16),
-            TextField(
-              controller: hargaController,
-              keyboardType: TextInputType.number,
-              decoration: const InputDecoration(
-                labelText: 'Harga Sewa per Hari',
-                border: OutlineInputBorder(),
-                prefixText: 'Rp ',
+              const SizedBox(height: 16),
+
+              TextFormField(
+                controller: hargaController,
+                keyboardType: TextInputType.number,
+                decoration: const InputDecoration(
+                  labelText: 'Harga Sewa per Hari',
+                  border: OutlineInputBorder(),
+                  prefixText: 'Rp ',
+                ),
+                validator: (value) {
+                  if (value == null || value.trim().isEmpty) {
+                    return 'Harga wajib diisi';
+                  }
+                  return null;
+                },
               ),
-            ),
-            const SizedBox(height: 16),
-            TextField(
-              controller: gambarController,
-              decoration: const InputDecoration(
-                labelText: 'URL Gambar',
-                border: OutlineInputBorder(),
+              const SizedBox(height: 16),
+
+              TextFormField(
+                controller: gambarController,
+                decoration: const InputDecoration(
+                  labelText: 'URL Gambar',
+                  border: OutlineInputBorder(),
+                ),
+                validator: (value) {
+                  if (value == null || value.trim().isEmpty) {
+                    return 'URL gambar wajib diisi';
+                  }
+                  return null;
+                },
               ),
-            ),
-            const SizedBox(height: 24),
-            ElevatedButton(
-              onPressed: saveKendaraan,
-              style: ElevatedButton.styleFrom(
-                padding: const EdgeInsets.symmetric(vertical: 20),
-                backgroundColor: Color(0xFFFB923C),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
+              const SizedBox(height: 24),
+
+              ElevatedButton(
+                onPressed: () {
+                  if (_formKey.currentState!.validate()) {
+                    saveKendaraan(); // hanya disimpan jika semua field valid
+                  }
+                },
+                style: ElevatedButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(vertical: 20),
+                  backgroundColor: Color(0xFFFB923C),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+                child: const Text(
+                  'Simpan Kendaraan',
+                  style: TextStyle(fontSize: 16, color: Colors.white),
                 ),
               ),
-              child: const Text(
-                'Simpan Kendaraan',
-                style: TextStyle(fontSize: 16, color: Colors.white),
-              ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

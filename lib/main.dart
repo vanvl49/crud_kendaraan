@@ -1,17 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:device_preview/device_preview.dart';
-import 'package:crud_penyewaan/views/listMobil_screen.dart';
+import 'package:crud_penyewaan/views/splash_screen.dart';
 import 'firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  runApp(
-    DevicePreview(
-      builder: (context) => MyApp(), // Wrap your app
-    ),
-  );
+  runApp(DevicePreview(builder: (context) => MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -20,7 +16,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(title: 'Flutter Demo', home: const ListMobil());
+    return MaterialApp(title: 'Flutter Demo', home: const SplashScreen());
   }
 }
 
